@@ -18,14 +18,15 @@ alias l='rg'
 alias c='code'
 alias ll='ls -al'
 
+
 #Bashrc Helpers
-pull_bash_aliases() {
-  echo "Pulling bash_aliases..."
-  s=`curl -k -s -m 3 -o ~/.bash_aliases_temp https://github.com/kamenomagic/dotfiles/bash_aliases`
-  if [ -e ~/.bash_aliases_temp ]; then
-      cmp --silent ~/.bash_aliases ~/.bash_aliases_temp || (mv ~/.bash_aliases_temp ~/.bash_aliases && source ~/.bash_aliases)
-  fi
-  rm ~/.bash_aliases_temp 2> /dev/null
+clone_dotfiles() {
+  pushd ~
+  echo "Cloning dotfiles..."
+  url='git@github.com:kamenomagic/dotfiles.git'
+  git clone "$url"
+  bash ./dotfiles/create_simlinks.sh
+  popd
 }
 
 with_ssh_key() {
@@ -33,8 +34,8 @@ with_ssh_key() {
 }
 
 refresh_ssh() {
-  if [ -e ~/.ssh_config ]; then
-    cat ~/.ssh_config 2> /dev/null > ~/.ssh/config
+  if [ -e ~/dotfiles/.ssh_config ]; then
+    cat ~/dotfiles/.ssh_config 2> /dev/null > ~/.ssh/config
   fi
 }
 
@@ -112,14 +113,10 @@ complete -F _ssh ssh
 set -o vi
 
 echo "Setting environment variables..."
-export PATH=~/synchronicity/bin:~/bin:/opt/arduino:/usr/local/cuda-9.0/bin:$PATH
+export PATH=~/bin:/usr/local/cuda-9.0/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
 export EDITOR=vim
 export TERM=screen-256color
 
-url='https://github.com/kamenomagic/dotfiles'
-echo "Pulling vimrc..."; curl "$url/vimrc" -k -m1 -s -o ~/.vimrc
-echo "Pulling tmux.conf..."; curl "$url/tmux.conf" -k -m1 -s -o ~/.tmux.conf
-echo "Pulling ssh_config..."; curl "$url/ssh_config" -k -m1 -s -o ~/.ssh_config
-echo "Pulling vrapperrc..."; curl "$url/vrapperrc" -k -m1 -s -o ~/.vrapperrc
+clone_dotfiles
 j
