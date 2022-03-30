@@ -1,0 +1,4 @@
+Host strawberry
+  HostName 192.168.0.126
+  User pi
+  Port 22
