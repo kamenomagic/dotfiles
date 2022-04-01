@@ -20,11 +20,18 @@ alias ll='ls -al'
 
 
 #Bashrc Helpers
-clone_dotfiles() {
+update_dotfiles() {
   pushd ~
-  echo "Cloning dotfiles..."
+  echo "Updating dotfiles..."
   url='git@github.com:kamenomagic/dotfiles.git'
-  git clone "$url"
+  dotfiles="$HOME/dotfiles"
+  if [ -d "$dotfiles" ]; then
+    pushd "$dotfiles" 
+    git pull
+    popd
+  else
+    git clone "$url"
+  fi
   bash ./dotfiles/create_simlinks.sh
   popd
 }
@@ -118,5 +125,5 @@ export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:/usr/local/cuda/extras/CUPTI/li
 export EDITOR=vim
 export TERM=screen-256color
 
-clone_dotfiles
+update_dotfiles
 j
