@@ -1,13 +1,11 @@
 convert_to_symlink() {
   filename=$1
-  echo "$filename"
   source="$HOME/dotfiles/$filename"
   target="$HOME/$filename"
   if [[ ! -L "$target" ]]; then
-    
-    echo "Not a link"
     rm "$target" 2> /dev/null
     ln -s "$source" "$target"
+    echo "Removed $target and created a symlink to $source"
   fi
 }
 
