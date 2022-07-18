@@ -79,6 +79,7 @@ alias sdc='sudo docker-compose'
 alias dm='docker-machine'
 
 alias bex='bundle exec'
+alias kube='kubectl'
 
 #Values
 echo "Setting colored text shortcuts..."
