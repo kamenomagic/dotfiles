@@ -81,16 +81,22 @@ alias dm='docker-machine'
 alias bex='bundle exec'
 
 #Kubernetes
-alias ku='kubectl'
-alias kube='ku'
-alias kuget='ku get'
-alias kuply='ku apply'
-alias kupply='kuply'
-alias kuapply='kuply'
-alias kuscribe='ku describe'
-alias kutch='ku patch'
-alias kuatch='kutch'
-alias kupatch='kutch'
+alias ku='kubectl' # kube blurb
+alias kube='ku' # kube blurb
+
+alias kuply='ku apply' # kube blurb
+alias kupply='kuply' # kube blurb
+alias kuapply='kuply' # kube blurb
+
+alias kuscribe='ku describe' # kube blurb
+
+alias kutch='ku patch' # kube blurb
+alias kuatch='kutch' # kube blurb
+alias kupatch='kutch' # kube blurb
+
+alias kuget='ku get' # kube blurb
+alias kuj='ku get all' # kube blurb
+function kuspace { kube config set-context --current --namespace="$1" } # kube blurb
 
 #Values
 echo "Setting colored text shortcuts..."
