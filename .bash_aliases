@@ -96,7 +96,7 @@ alias kupatch='kutch' # kube blurb
 
 alias kuget='ku get' # kube blurb
 alias kuj='ku get all' # kube blurb
-function kuspace { kube config set-context --current --namespace="$1" } # kube blurb
+function kuspace { kube config set-context --current --namespace="$1"; } # kube blurb
 
 #Values
 echo "Setting colored text shortcuts..."
