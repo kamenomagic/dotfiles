@@ -81,6 +81,7 @@ alias dm='docker-machine'
 alias bex='bundle exec'
 
 #Kubernetes
+function kelp { cat $HOME/.bash_aliases | grep 'kube blurb'; } # kube blurb
 alias ku='kubectl' # kube blurb
 alias kube='ku' # kube blurb
 
