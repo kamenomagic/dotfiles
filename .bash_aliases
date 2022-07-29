@@ -97,6 +97,7 @@ alias kupatch='kutch' # kube blurb
 
 alias kuget='ku get' # kube blurb
 alias kuj='ku get all' # kube blurb
+alias kussh='docker run -it --rm --privileged --pid=host justincormack/nsenter1' # kube blurb
 function kuspace { kube config set-context --current --namespace="$1"; } # kube blurb
 
 #Values
