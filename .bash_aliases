@@ -10,7 +10,7 @@ j() {
     if type exa >/dev/null 2>&1; then exa -alh; else ls -alh; fi
     git branch --color=always 2> /dev/null
     git status 2> /dev/null
-    git log --pretty="%C(Yellow)%h  %C(reset)%ad (%C(Green)%cr%C(reset))%x09 %C(Cyan)%an: %C(reset)%d %s" --color=always 2> /dev/null | head -n 10
+    git log --pretty="%C(Yellow)%h  %C(reset)%ad (%C(Green)%cr%C(reset))%x09 %C(Cyan)%an: %C(reset)%d %s" --color=always 2> /dev/null | head -n 3
 }
 alias k='fd'
 alias l='rg'
