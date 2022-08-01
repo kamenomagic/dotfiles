@@ -83,7 +83,7 @@ alias bex='bundle exec'
 #Kubernetes
 function kelp { cat $HOME/.bash_aliases | grep 'kube blurb'; } # kube blurb
 alias ku='kubectl' # kube blurb
-alias kue='ku events' # kube blurb
+alias kue='ku get events' # kube blurb
 alias kua='ku apply -f' # kube blurb
 alias kuc='ku create -f' # kube blurb
 alias kude='ku delete -f' # kube blurb
