@@ -83,20 +83,16 @@ alias bex='bundle exec'
 #Kubernetes
 function kelp { cat $HOME/.bash_aliases | grep 'kube blurb'; } # kube blurb
 alias ku='kubectl' # kube blurb
-alias kube='ku' # kube blurb
-
-alias kuply='ku apply' # kube blurb
-alias kupply='kuply' # kube blurb
-alias kuapply='kuply' # kube blurb
-
-alias kuscribe='ku describe' # kube blurb
-
-alias kutch='ku patch' # kube blurb
-alias kuatch='kutch' # kube blurb
-alias kupatch='kutch' # kube blurb
-
-alias kuget='ku get' # kube blurb
+alias kue='ku events' # kube blurb
+alias kua='ku apply -f' # kube blurb
+alias kuc='ku create -f' # kube blurb
+alias kude='ku delete -f' # kube blurb
+alias kud='ku describe' # kube blurb
+alias kup='ku patch' # kube blurb
+alias kug='ku get' # kube blurb
 alias kuj='ku get all' # kube blurb
+alias kux='ku exec' # kube blurb
+alias kul='ku logs' # kube blurb
 alias kussh='docker run -it --rm --privileged --pid=host justincormack/nsenter1' # kube blurb
 function kuspace { kube config set-context --current --namespace="$1"; } # kube blurb
 
