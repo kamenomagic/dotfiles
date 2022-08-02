@@ -95,7 +95,7 @@ alias kuj='ku get all' # kube blurb
 alias kux='ku exec' # kube blurb
 alias kul='ku logs' # kube blurb
 alias kussh='docker run -it --rm --privileged --pid=host justincormack/nsenter1' # kube blurb
-function kuspace { kube config set-context --current --namespace="$1"; } # kube blurb
+function kuspace { ku config set-context --current --namespace="$1"; } # kube blurb
 
 #Values
 echo "Setting colored text shortcuts..."
