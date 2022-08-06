@@ -50,6 +50,11 @@ xkeymap() {
   setxkbmap -option ctrl:nocaps 2> /dev/null
 }
 
+#Expo
+function watchyarnmodule {
+  while inotifywait -e close_write $1/*; do yarn add "$1"; touch `ls -p | grep -v / | head -n 1`; done;
+}
+
 #Git
 function gelp { cat $HOME/.bash_aliases | grep 'git blurb'; } # git blurb
 function ga { git add "$@" && j; } # git blurb
