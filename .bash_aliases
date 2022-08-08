@@ -108,7 +108,8 @@ function kugetcontextindexbyname { kufig get-contexts | nl0 | grep $1 | awk '{pr
 function kugetcontextnamebyindex { kufig get-contexts | nl0 | awk -v i=$1 '$1 == i {print $3}'; }
 function kutext { # kube blurb
   kufig get-contexts | nl0; # kube blurb
-  read -p "Select a context (number): " contextIndex; # kube blurb
+  read -n 1 -p "Select a context (number): " contextIndex; # kube blurb
+  echo ""
   defaultContextIndex=`kugetcontextindexbyname docker-desktop`; # kube blurb
   contextIndex=${contextIndex:-$defaultContextIndex}; # kube blurb
   contextName=`kugetcontextnamebyindex $contextIndex` # kube blurb
