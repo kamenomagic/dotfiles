@@ -99,8 +99,22 @@ alias kug='ku get' # kube blurb
 alias kuj='ku get all' # kube blurb
 alias kux='ku exec' # kube blurb
 alias kul='ku logs' # kube blurb
+alias kufig='ku config' # kube blurb
 alias kussh='docker run -it --rm --privileged --pid=host justincormack/nsenter1' # kube blurb
-function kuspace { ku config set-context --current --namespace="$1"; } # kube blurb
+alias kulocal='kufig use-context docker-desktop' # kube blurb
+alias nl0='nl -v 0'
+function kuspace { kufig set-context --current --namespace="$1"; } # kube blurb
+function kugetcontextindexbyname { kufig get-contexts | nl0 | grep $1 | awk '{print $1}'; }
+function kugetcontextnamebyindex { kufig get-contexts | nl0 | awk -v i=$1 '$1 == i {print $3}'; }
+function kutext { # kube blurb
+  kufig get-contexts | nl0; # kube blurb
+  read -p "Select a context (number): " contextIndex; # kube blurb
+  defaultContextIndex=`kugetcontextindexbyname docker-desktop`; # kube blurb
+  contextIndex=${contextIndex:-$defaultContextIndex}; # kube blurb
+  contextName=`kugetcontextnamebyindex $contextIndex` # kube blurb
+  echo "kufig use-context $contextName"; # kube blurb
+  kufig use-context $contextName; # kube blurb
+} # kube blurb
 
 #Values
 echo "Setting colored text shortcuts..."
