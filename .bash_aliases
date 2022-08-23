@@ -85,6 +85,9 @@ alias dm='docker-machine'
 
 alias bex='bundle exec'
 
+#Terraform
+alias tf='teraform'
+
 #Kubernetes
 function kelp { cat $HOME/.bash_aliases | grep 'kube blurb'; } # kube blurb
 alias ku='kubectl' # kube blurb
