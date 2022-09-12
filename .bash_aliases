@@ -52,7 +52,7 @@ xkeymap() {
 
 #Expo
 function watchyarnmodule {
-  while inotifywait -e close_write $1/*; do yarn add "$1"; touch `ls -p | grep -v / | head -n 1`; done;
+  while inotifywait -r -e close_write $1; do yarn add "$1"; touch `ls -p | grep -v / | head -n 1`; done;
 }
 
 #Git
