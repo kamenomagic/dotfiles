@@ -106,8 +106,10 @@ alias kul='ku logs' # kube blurb
 alias kufig='ku config' # kube blurb
 alias kussh='docker run -it --rm --privileged --pid=host justincormack/nsenter1' # kube blurb
 alias kulocal='kufig use-context docker-desktop' # kube blurb
+alias kurl='sensible-browser http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/overview?namespace=default'
 alias nl0='nl -v 0'
-function kutdev { aws eks get-token --cluster-name channels-email --profile eks-deploy-user-dev | jq -r .status.token; } # kube blurb
+alias kutdev='aws eks get-token --cluster-name channels-email --profile eks-deploy-user-dev | jq -r .status.token' # kube blurb
+alias kudevopen='kutdev | clip.exe && kurl' # kube blurb
 function kuspace { kufig set-context --current --namespace="$1"; } # kube blurb
 function kugetcontextindexbyname { kufig get-contexts | nl0 | grep $1 | awk '{print $1}'; }
 function kugetcontextnamebyindex { kufig get-contexts | nl0 | awk -v i=$1 '$1 == i {print $3}'; }
