@@ -50,9 +50,12 @@ xkeymap() {
   setxkbmap -option ctrl:nocaps 2> /dev/null
 }
 
-#Expo
-function watchyarnmodule {
-  while inotifywait -r -e close_write $1; do yarn add "$1"; touch `ls -p | grep -v / | head -n 1`; done;
+#Expo, poetry
+function hotwatch {
+  while inotifywait -r -e close_write $1; do $2; touch `ls -p | grep -v / | head -n 1`; done;
+}
+function hotwatchyarn {
+  hotreload $1 yarn add "$1"
 }
 
 #Git
