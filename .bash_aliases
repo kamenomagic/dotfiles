@@ -52,10 +52,15 @@ xkeymap() {
 
 #Expo, poetry
 function hotwatch {
-  while inotifywait -r -e close_write $1; do $2; touch `ls -p | grep -v / | head -n 1`; done;
+  while inotifywait -r -e close_write $1; do eval "$2"; touch `ls -R | grep "$3\$"`; done;
 }
 function hotwatchyarn {
-  hotreload $1 yarn add "$1"
+  hotwatch $1 "yarn add $1" ".js";
+}
+function hotwatchpoetry {
+  echo "poetry remove `echo $1 | awk -F/ '{print $NF}'` && poetry add $1"
+  package=`echo $1 | awk -F/ '{print $NF}'` 
+  hotwatch $1 "poetry remove $package && poetry add $1" ".py";
 }
 
 #Git
