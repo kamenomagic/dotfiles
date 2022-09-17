@@ -52,7 +52,7 @@ xkeymap() {
 
 #Expo, poetry
 function hotwatch {
-  while inotifywait -r -e close_write $1; do eval "$2"; touch `ls -R | grep "$3\$"`; done;
+  while inotifywait -r -e close_write $1; do eval "$2"; touch `find . -type f | grep "$3\$"`; done;
 }
 function hotwatchyarn {
   hotwatch $1 "yarn add $1" ".js";
