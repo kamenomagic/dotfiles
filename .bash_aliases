@@ -62,6 +62,9 @@ function hotwatchpoetry {
   package=`echo $1 | awk -F/ '{print $NF}'` 
   hotwatch $1 "poetry remove $package && poetry add $1" ".py";
 }
+function hotwatchpytest {
+  hotwatch ./ "poetry run pytest -vv --cov-report term --cov-report html --cov octo" ""
+}
 
 #Git
 function gelp { cat $HOME/.bash_aliases | grep 'git blurb'; } # git blurb
