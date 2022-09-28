@@ -63,7 +63,7 @@ function hotwatchpoetry {
   hotwatch $1 "poetry remove $package && poetry add $1" ".py";
 }
 function hotwatchpytest {
-  hotwatch ./ "poetry run pytest -vv --cov-report term --cov-report html --cov octo" ""
+  hotwatch ./ "poetry run pytest" ""
 }
 
 #Git
