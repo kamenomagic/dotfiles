@@ -90,6 +90,9 @@ function gush { git add . && git commit -m "$1" && git push && j; } # git blurb
 
 git config --global pager.branch false
 
+#Poetry
+alias pun='poetry run'
+
 #Docker
 alias dc='docker-compose'
 alias sdc='sudo docker-compose'
