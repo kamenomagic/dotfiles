@@ -117,13 +117,11 @@ alias kug='ku get' # kube blurb
 alias kuj='ku get all' # kube blurb
 alias kux='ku exec' # kube blurb
 alias kul='ku logs' # kube blurb
+alias kuproxy='ku proxy' # kube blurb
 alias kufig='ku config' # kube blurb
 alias kussh='docker run -it --rm --privileged --pid=host justincormack/nsenter1' # kube blurb
 alias kulocal='kufig use-context docker-desktop' # kube blurb
-alias kurl='sensible-browser http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/overview?namespace=default' # kube blurb
 alias nl0='nl -v 0'
-alias kutdev='aws eks get-token --cluster-name channels-email --profile eks-deploy-user-dev | jq -r .status.token' # kube blurb
-alias kudevopen='kutdev | clip.exe && kurl' # kube blurb
 function kuspace { kufig set-context --current --namespace="$1"; } # kube blurb
 function kugetcontextindexbyname { kufig get-contexts | nl0 | grep $1 | awk '{print $1}'; }
 function kugetcontextnamebyindex { kufig get-contexts | nl0 | awk -v i=$1 '$1 == i {print $3}'; }
@@ -137,6 +135,9 @@ function kutext { # kube blurb
   echo "kufig use-context $contextName"; # kube blurb
   kufig use-context $contextName; # kube blurb
 } # kube blurb
+alias kurl='sensible-browser http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/overview?namespace=default' # kube blurb
+function kut { aws eks get-token --cluster-name channels-email --profile "eks-deploy-user-$1" | jq -r .status.token; } # kube blurb
+function kutopen { kut $1 | clip.exe && kurl; } # kube blurb
 
 #Values
 echo "Setting colored text shortcuts..."
