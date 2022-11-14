@@ -1,7 +1,7 @@
 echo "Sourcing bash_aliases..."
 echo "Setting aliases..."
 
-alias a='tmux a'
+alias a='tmux a || tmux'
 alias s='sudo'
 alias d='docker'
 alias g='git'
