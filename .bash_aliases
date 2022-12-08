@@ -139,6 +139,7 @@ alias kurl='sensible-browser http://localhost:8001/api/v1/namespaces/kubernetes-
 function kupdateconfig { aws eks update-kubeconfig --name channels-email --profile eks-deploy-user-$1; } # kube blurb
 function kut { aws eks get-token --cluster-name channels-email --profile "eks-deploy-user-$1" | jq -r .status.token; } # kube blurb
 function kutopen { kut $1 | clip.exe && kurl; } # kube blurb
+function kup { kupdateconfig $1 && kutopen $1; kuproxy; } # kube blurb
 
 #Values
 echo "Setting colored text shortcuts..."
