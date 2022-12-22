@@ -93,6 +93,9 @@ git config --global pager.branch false
 #Poetry
 alias pun='poetry run'
 
+#Windows/WSL
+alias ps='powershell.exe -Command'
+
 #Docker
 alias dc='docker-compose'
 alias sdc='sudo docker-compose'
