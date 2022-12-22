@@ -94,7 +94,10 @@ git config --global pager.branch false
 alias pun='poetry run'
 
 #Windows/WSL
-alias ps='powershell.exe -Command'
+alias ps="powershell.exe -Command"
+alias pspython="ps 'C:\\\\Users\\sjaco\\AppData\\Local\\Programs\\Python\\Python39\\python.exe'"
+alias pspoetry="ps 'C:\\\\Users\\sjaco\\AppData\\Roaming\\Python\\Scripts\\poetry.exe'"
+alias pspyinstaller="ps 'C:\\\\Users\\sjaco\\AppData\\Local\\Programs\\Python\\Python39\\Scripts\\pyinstaller.exe'"
 
 #Docker
 alias dc='docker-compose'
