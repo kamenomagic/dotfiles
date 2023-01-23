@@ -141,10 +141,10 @@ function kutext { # kube blurb
   echo "kufig use-context $contextName"; # kube blurb
   kufig use-context $contextName; # kube blurb
 } # kube blurb
-alias kurl='sensible-browser http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/overview?namespace=default' # kube blurb
 function kupdateconfig { aws eks update-kubeconfig --name channels-email --profile eks-deploy-user-$1; } # kube blurb
-function kut { aws eks get-token --cluster-name channels-email --profile "eks-deploy-user-$1" | jq -r .status.token; } # kube blurb
-function kutopen { kut $1 | clip.exe && kurl; } # kube blurb
+function kutoken { aws eks get-token --cluster-name channels-email --profile "eks-deploy-user-$1" | jq -r .status.token; } # kube blurb
+alias kurl='sensible-browser http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/overview?namespace=default' # kube blurb
+function  kut { kutoken $1 | clip.exe; } # kube blurb
 function kup { kupdateconfig $1 && kutopen $1; kuproxy; } # kube blurb
 
 #Values
