@@ -187,10 +187,15 @@ complete -F _ssh ssh
 set -o vi
 
 echo "Setting environment variables..."
+ipconfig=`ipconfig.exe 2> /dev/null`
+wslipconfig=`echo "$ipconfig" | sed -n '/WSL/,$p'`
+export WINDOWS_IP=`echo "$ipconfig" | grep -Pom 1 '^\s*IPv4.*:\s\K(?!172)(.*)'`
+export WSL_IP=`echo "$wslipconfig" | grep -Pom 1 '^\s*IPv4.*:\s\K172(.*)'`
+
 export PATH=~/bin:/usr/local/cuda-9.0/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
 export EDITOR=vim
 export TERM=screen-256color
 
-update_dotfiles
-j
+# update_dotfiles
+# j
