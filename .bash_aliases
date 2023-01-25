@@ -197,5 +197,5 @@ export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:/usr/local/cuda/extras/CUPTI/li
 export EDITOR=vim
 export TERM=screen-256color
 
-# update_dotfiles
-# j
+update_dotfiles
+j
