@@ -187,7 +187,7 @@ complete -F _ssh ssh
 set -o vi
 
 echo "Setting environment variables..."
-export WINDOWS_IP=`ipconfig.exe 2> /dev/null | grep -Pom 1 '^\s*IPv4.*:\s\K(?!172)(.*)'`
+export HOST_IP=`ipconfig.exe 2> /dev/null | grep -Pom 1 '^\s*IPv4.*:\s\K(?!172)(\d+\.*)+'`
 export WSL_IP=`ip addr show | grep -Po "\s*inet\s\K(\d+\.*)+" | grep -v "127.0.0.1"`
 alias port_forward_wsl_helper="echo 'netsh interface portproxy add v4tov4 listenport=19000 connectport=19000 connectaddress='$WSL_IP | clip.exe; powershell.exe Start-Process -Verb runas powershell.exe"
 alias forward_wsl_port='powershell.exe Start-Process -Verb runas netsh -ArgumentList "interface", "portproxy", "add", "v4tov4", "listenport=19000", "connectport=19000", "connectaddress='$WSL_IP'"'
