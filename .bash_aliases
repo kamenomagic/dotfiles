@@ -187,10 +187,11 @@ complete -F _ssh ssh
 set -o vi
 
 echo "Setting environment variables..."
-ipconfig=`ipconfig.exe 2> /dev/null`
-wslipconfig=`echo "$ipconfig" | sed -n '/WSL/,$p'`
-export WINDOWS_IP=`echo "$ipconfig" | grep -Pom 1 '^\s*IPv4.*:\s\K(?!172)(.*)'`
-export WSL_IP=`echo "$wslipconfig" | grep -Pom 1 '^\s*IPv4.*:\s\K172(.*)'`
+export WINDOWS_IP=`ipconfig.exe 2> /dev/null | grep -Pom 1 '^\s*IPv4.*:\s\K(?!172)(.*)'`
+export WSL_IP=`ip addr show | grep -Po "\s*inet\s\K(\d+\.*)+" | grep -v "127.0.0.1"`
+forward_command="netsh interface portproxy add v4tov4 listenport=19000 connectport=19000 connectaddress=$WSL_IP"
+alias port_forward_wsl_helper="echo $forward_command | clip.exe; powershell.exe Start-Process -Verb runas powershell.exe"
+alias forward_wsl_port='powershell.exe Start-Process -Verb runas netsh -ArgumentList "interface", "portproxy", "add", "v4tov4", "listenport=19000", "connectport=19000", "connectaddress='$WSL_IP'"'
 
 export PATH=~/bin:/usr/local/cuda-9.0/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
