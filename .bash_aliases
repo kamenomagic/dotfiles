@@ -180,6 +180,24 @@ _ssh() {
     return 0
 }
 
+set_host_ip() {
+  export HOST_IP=`ipconfig.exe 2> /dev/null | grep -Pom 1 '^\s*IPv4.*:\s\K(?!172)(\d+\.*)+'`
+}
+
+set_wsl_ip() {
+  export WSL_IP=`ip addr show | grep -Po "\s*inet\s\K(\d+\.*)+" | grep -v "127.0.0.1"`
+}
+
+forward_port_to_wsl() {
+  set_wsl_ip
+  echo "Forwarding traffic from $HOST_IP:$1 to $WSL_IP:$1"
+  powershell.exe Start-Process -Verb runas netsh -ArgumentList "interface", "portproxy", "add", "v4tov4", "listenport='$1'", "connectport='$1'", "connectaddress='$WSL_IP'"
+}
+
+alias port_forward_wsl_helper="echo 'netsh interface portproxy add v4tov4 listenport=19000 connectport=19000 connectaddress='$WSL_IP | clip.exe; powershell.exe Start-Process -Verb runas powershell.exe"
+alias forward_metro='forward_port_to_wsl 19000'
+alias forward_react_native_devtools='forward_port_to_wsl 8097'
+
 bindkey -v
 bindkey '^R' history-incremental-search-backward
 
@@ -187,10 +205,8 @@ complete -F _ssh ssh
 set -o vi
 
 echo "Setting environment variables..."
-export HOST_IP=`ipconfig.exe 2> /dev/null | grep -Pom 1 '^\s*IPv4.*:\s\K(?!172)(\d+\.*)+'`
-export WSL_IP=`ip addr show | grep -Po "\s*inet\s\K(\d+\.*)+" | grep -v "127.0.0.1"`
-alias port_forward_wsl_helper="echo 'netsh interface portproxy add v4tov4 listenport=19000 connectport=19000 connectaddress='$WSL_IP | clip.exe; powershell.exe Start-Process -Verb runas powershell.exe"
-alias forward_wsl_port='powershell.exe Start-Process -Verb runas netsh -ArgumentList "interface", "portproxy", "add", "v4tov4", "listenport=19000", "connectport=19000", "connectaddress='$WSL_IP'"'
+set_host_ip
+set_wsl_ip
 
 export PATH=~/bin:/usr/local/cuda-9.0/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
