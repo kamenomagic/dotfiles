@@ -94,7 +94,10 @@ git config --global pager.branch false
 alias pun='poetry run'
 
 #Windows/WSL
-alias pow="powershell.exe -Command"
+function pow() {
+  powershell.exe -Command "\$env:Path = [Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [Environment]::GetEnvironmentVariable('Path','User') ; $@"
+}
+
 alias powpython="ps 'C:\\\\Users\\sjaco\\AppData\\Local\\Programs\\Python\\Python39\\python.exe'"
 alias powpoetry="ps 'C:\\\\Users\\sjaco\\AppData\\Roaming\\Python\\Scripts\\poetry.exe'"
 alias powpyinstaller="ps 'C:\\\\Users\\sjaco\\AppData\\Local\\Programs\\Python\\Python39\\Scripts\\pyinstaller.exe'"
