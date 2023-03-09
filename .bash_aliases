@@ -211,8 +211,8 @@ echo "Setting environment variables..."
 set_host_ip
 set_wsl_ip
 
-export PATH=~/bin:/usr/local/cuda-9.0/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
+export PATH=~/bin:$PATH
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-11.2/lib64:/usr/local/cuda-11/"
 export EDITOR=vim
 export TERM=screen-256color
 
