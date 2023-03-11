@@ -17,7 +17,7 @@ alias l='rg'
 
 alias c='code'
 alias ll='ls -al'
-alias mountuserfstabs="cat /etc/fstab | grep user | cut -f 1 | xargs -L 1 mount"
+alias mountuserfstabs="cat /etc/fstab | grep user | cut -f 2 | xargs -L 1 mount --target"
 
 
 #Bashrc Helpers
