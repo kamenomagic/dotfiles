@@ -17,6 +17,7 @@ alias l='rg'
 
 alias c='code'
 alias ll='ls -al'
+alias mountuserfstabs="cat /etc/fstab | grep user | cut -f 1 | xargs -L 1 mount"
 
 
 #Bashrc Helpers
@@ -201,8 +202,8 @@ alias port_forward_wsl_helper="echo 'netsh interface portproxy add v4tov4 listen
 alias forward_metro='forward_port_to_wsl 19000'
 alias forward_react_native_devtools='forward_port_to_wsl 8097'
 
-bindkey -v
-bindkey '^R' history-incremental-search-backward
+bindkey -v 2> /dev/null
+bindkey '^R' history-incremental-search-backward 2> /dev/null
 
 complete -F _ssh ssh
 set -o vi
@@ -216,5 +217,6 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-11.2/lib64:/usr/local/c
 export EDITOR=vim
 export TERM=screen-256color
 
+mountuserfstabs
 update_dotfiles
 j
