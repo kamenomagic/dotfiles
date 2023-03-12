@@ -18,6 +18,7 @@ alias l='rg'
 alias c='code'
 alias ll='ls -al'
 alias mountuserfstabs="cat /etc/fstab | grep user | cut -f 2 | xargs -L 1 mount --target"
+# example in /etc/fstab: /home/kamenomagic/dev/octoputty/libraries/oui   /home/kamenomagic/dev/octoputty/libraries/ouibook/oui   none    bind,user,rw    0       0
 
 
 #Bashrc Helpers
