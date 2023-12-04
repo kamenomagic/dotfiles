@@ -88,7 +88,7 @@ function gast { git status "$@" && j; } # git blurb
 function glog { git log "$@" && j; } # git blurb
 function glone { git clone "$@" && j; } # git blurb
 function gadc { gad && goc -m "$1" && j; } # git blurb
-function gush { git add . && git commit -m "$1" && git push && j; } # git blurb
+function gush { git add . && git commit -m "$@" && git push --set-upstream origin $(git symbolic-ref --short HEAD) && j; } # git blurb
 
 git config --global pager.branch false
 
@@ -218,6 +218,5 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-11.2/lib64:/usr/local/c
 export EDITOR=vim
 export TERM=screen-256color
 
-mountuserfstabs
 update_dotfiles
 j
