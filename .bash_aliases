@@ -20,15 +20,19 @@ alias ll='ls -al'
 alias mountuserfstabs="cat /etc/fstab | grep user | cut -f 2 | xargs -L 1 mount --target"
 # example in /etc/fstab: /home/kamenomagic/dev/octoputty/libraries/oui   /home/kamenomagic/dev/octoputty/libraries/ouibook/oui   none    bind,user,rw    0       0
 
+dotfiles_dir="$HOME/dotfiles"
+
+alias reload_bash_aliases="source $dotfiles_dir/.bash_aliases"
+alias refresh_bash_aliases="reload_bash_aliases"
+alias r="reload_bash_aliases"
 
 #Bashrc Helpers
 update_dotfiles() {
   pushd ~
   echo "Updating dotfiles..."
   url='git@github.com:kamenomagic/dotfiles.git'
-  dotfiles="$HOME/dotfiles"
-  if [ -d "$dotfiles" ]; then
-    pushd "$dotfiles" 
+  if [ -d "$dotfiles_dir" ]; then
+    pushd "$dotfiles_dir" 
     git pull
     popd
   else
