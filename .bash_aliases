@@ -22,12 +22,12 @@ alias mountuserfstabs="cat /etc/fstab | grep user | cut -f 2 | xargs -L 1 mount 
 
 dotfiles_dir="$HOME/dotfiles"
 
-alias reload_bash_aliases="source $dotfiles_dir/.bash_aliases"
-alias refresh_bash_aliases="reload_bash_aliases"
-alias r="reload_bash_aliases"
+alias reload-bash-aliases="source $dotfiles_dir/.bash_aliases"
+alias refresh-bash-aliases="reload-bash-aliases"
+alias r="reload-bash-aliases"
 
 #Bashrc Helpers
-update_dotfiles() {
+update-dotfiles() {
   pushd ~
   echo "Updating dotfiles..."
   url='git@github.com:kamenomagic/dotfiles.git'
@@ -42,11 +42,11 @@ update_dotfiles() {
   popd
 }
 
-with_ssh_key() {
+with-ssh-key() {
   ssh-agent bash -c "ssh-add $1; ${@:2}"
 }
 
-refresh_ssh() {
+refresh-ssh() {
   if [ -e ~/dotfiles/.ssh_config ]; then
     cat ~/dotfiles/.ssh_config 2> /dev/null > ~/.ssh/config
   fi
@@ -104,8 +104,9 @@ function pow() {
   powershell.exe -Command "\$env:Path = [Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [Environment]::GetEnvironmentVariable('Path','User') ; $@"
 }
 
-alias powpython="ps 'C:\\\\Users\\sjaco\\AppData\\Local\\Programs\\Python\\Python39\\python.exe'"
-alias powpoetry="ps 'C:\\\\Users\\sjaco\\AppData\\Roaming\\Python\\Scripts\\poetry.exe'"
+alias pow-reset-wsl-clock="pow wsl -d docker-desktop -e /sbin/hwclock -s"
+alias pow-python="ps 'C:\\\\Users\\sjaco\\AppData\\Local\\Programs\\Python\\Python39\\python.exe'"
+alias pow-poetry="ps 'C:\\\\Users\\sjaco\\AppData\\Roaming\\Python\\Scripts\\poetry.exe'"
 alias powpyinstaller="ps 'C:\\\\Users\\sjaco\\AppData\\Local\\Programs\\Python\\Python39\\Scripts\\pyinstaller.exe'"
 
 #Docker
@@ -189,23 +190,23 @@ _ssh() {
     return 0
 }
 
-set_host_ip() {
+set-host-ip() {
   export HOST_IP=`ipconfig.exe 2> /dev/null | grep -Pom 1 '^\s*IPv4.*:\s\K(?!172)(\d+\.*)+'`
 }
 
-set_wsl_ip() {
+set-wsl-ip() {
   export WSL_IP=`ip addr show | grep -Po "\s*inet\s\K(\d+\.*)+" | grep -v "127.0.0.1"`
 }
 
-forward_port_to_wsl() {
-  set_wsl_ip
+forward-port-to-wsl() {
+  set-wsl-ip
   echo "Forwarding traffic from $HOST_IP:$1 to $WSL_IP:$1"
   powershell.exe Start-Process -Verb runas netsh -ArgumentList "interface", "portproxy", "add", "v4tov4", "listenport='$1'", "connectport='$1'", "connectaddress='$WSL_IP'"
 }
 
-alias port_forward_wsl_helper="echo 'netsh interface portproxy add v4tov4 listenport=19000 connectport=19000 connectaddress='$WSL_IP | clip.exe; powershell.exe Start-Process -Verb runas powershell.exe"
-alias forward_metro='forward_port_to_wsl 19000'
-alias forward_react_native_devtools='forward_port_to_wsl 8097'
+alias port-forward-wsl-helper="echo 'netsh interface portproxy add v4tov4 listenport=19000 connectport=19000 connectaddress='$WSL_IP | clip.exe; powershell.exe Start-Process -Verb runas powershell.exe"
+alias forward-metro='forward-port-to-wsl 19000'
+alias forward-react-native-devtools='forward-port-to-wsl 8097'
 
 bindkey -v 2> /dev/null
 bindkey '^R' history-incremental-search-backward 2> /dev/null
@@ -214,13 +215,13 @@ complete -F _ssh ssh
 set -o vi
 
 echo "Setting environment variables..."
-set_host_ip
-set_wsl_ip
+set-host-ip
+set-wsl-ip
 
 export PATH=~/bin:$PATH
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-11.2/lib64:/usr/local/cuda-11/"
 export EDITOR=vim
 export TERM=screen-256color
 
-update_dotfiles
+update-dotfiles
 j
