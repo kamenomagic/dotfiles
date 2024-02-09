@@ -119,6 +119,9 @@ alias bex='bundle exec'
 #Terraform
 alias tf='terraform'
 
+#AWS
+alias aws-set-default-profile="export AWS_DEFAULT_PROFILE=$1"
+
 #Kubernetes
 function kelp { cat $HOME/.bash_aliases | grep 'kube blurb'; } # kube blurb
 alias ku='kubectl' # kube blurb
@@ -223,5 +226,6 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-11.2/lib64:/usr/local/c
 export EDITOR=vim
 export TERM=screen-256color
 
+aws-set-default-profile default
 update-dotfiles
 j
