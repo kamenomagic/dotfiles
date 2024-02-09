@@ -120,7 +120,10 @@ alias bex='bundle exec'
 alias tf='terraform'
 
 #AWS
-alias aws-set-default-profile="export AWS_DEFAULT_PROFILE=$1"
+function aws-set-default-profile {
+  export AWS_DEFAULT_PROFILE=$1
+  echo AWS_DEFAULT_PROFILE=$AWS_DEFAULT_PROFILE
+}
 
 #Kubernetes
 function kelp { cat $HOME/.bash_aliases | grep 'kube blurb'; } # kube blurb
