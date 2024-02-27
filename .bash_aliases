@@ -140,7 +140,6 @@ drun () {
     --name "$dir"\
     "$dir:latest"
 }
-alias dstart="drun"
 
 dbuildrun () {
   dbuild && drun $@
