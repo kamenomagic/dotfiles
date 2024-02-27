@@ -113,6 +113,31 @@ alias powpyinstaller="ps 'C:\\\\Users\\sjaco\\AppData\\Local\\Programs\\Python\\
 alias dc='docker-compose'
 alias sdc='sudo docker-compose'
 alias dm='docker-machine'
+d-stop () {
+  dir=`basename "$PWD"`
+  out=$(docker rm --force --volumes $dir 2> /dev/null)
+  [ "$out" ] && echo "Removed $out"
+}
+
+d-build () {
+  dir=`basename "$PWD"`
+  docker build $@ -t $dir:latest .
+}
+
+d-run () {
+  dir=`basename "$PWD"`
+  d-stop
+  docker run $@\
+    --rm\
+    --label bash_aliases\
+    --network host\
+    --name "$dir"\
+    "$dir:latest"
+}
+
+d-build-run () {
+  d-build && d-run $@
+}
 
 alias bex='bundle exec'
 
