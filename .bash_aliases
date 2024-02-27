@@ -116,7 +116,7 @@ alias dm='docker-machine'
 
 dtail () {
   dir=`basename "$PWD"`
-  docker logs --follow --tail 50 $@
+  docker logs --follow --tail 50 $dir $@
 }
 
 dstop () {
@@ -133,12 +133,13 @@ dbuild () {
 drun () {
   dir=`basename "$PWD"`
   dstop
-  docker run $@\
+  docker run -d $@\
     --rm\
     --label bash_aliases\
     --network host\
     --name "$dir"\
     "$dir:latest"
+  dtail
 }
 
 dbuildrun () {
