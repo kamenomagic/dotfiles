@@ -22,9 +22,20 @@ alias mountuserfstabs="cat /etc/fstab | grep user | cut -f 2 | xargs -L 1 mount 
 
 dotfiles_dir="$HOME/dotfiles"
 
+# Dotfiles (Not in this repo, machine specific)
+alias reload-bashrc="source ~/.bashrc"
+alias refresh-bashrc="reload-bashrc"
+
+# Dotfiles (Meta commands, this repo)
 alias reload-bash-aliases="source $dotfiles_dir/.bash_aliases"
 alias refresh-bash-aliases="reload-bash-aliases"
 alias r="reload-bash-aliases"
+alias goto-dotfiles="echo 'Run popd when done'; pushd ~/dotfiles"
+gush-dotfiles() {
+  pushd ~/dotfiles
+  gush $@
+  popd
+}
 
 #Bashrc Helpers
 update-dotfiles() {
